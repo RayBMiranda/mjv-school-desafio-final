@@ -14,17 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
 @Table(name = "empresas")
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
