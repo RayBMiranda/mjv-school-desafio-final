@@ -13,27 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.mjv.school.projetofinal.model.Cadastro;
-import edu.mjv.school.projetofinal.repository.CadastroRepository;
+import edu.mjv.school.projetofinal.model.UF;
+import edu.mjv.school.projetofinal.repository.UFRepository;
 
 @RestController
-@RequestMapping("/cadastros")
-public class CadastroController {
+@RequestMapping("/ufs")
+public class UFController {
     @Autowired
-    private CadastroRepository repository;
+    private UFRepository repository;
 
     @PostMapping()
-    public void gravar(@RequestBody Cadastro cadastro){
-        System.out.println("Gravando dados");
-        System.out.println(cadastro);
-        repository.save(cadastro);
+    public UF gravar(@RequestBody UF uf){
+        return repository.save(uf);
     }
 
     @PutMapping()
-    public void alterar(@RequestBody Cadastro cadastro){
-        System.out.println("Alterando dados");
-        System.out.println(cadastro); 
-        repository.save(cadastro); 
+    public UF alterar(@RequestBody UF uf){
+         return repository.save(uf); 
     }
 
     @DeleteMapping(value = "/{id}")
@@ -44,13 +40,19 @@ public class CadastroController {
     }
 
     @GetMapping("/filtro")
-    public List<Cadastro> filtrar(@RequestParam("nm") String nome){
-        System.out.println("Listando cadastros pelo nome: " + nome);      
+    public List<UF> filtrar(@RequestParam("nm") String nome){
+        System.out.println("Listando categoria pelo nome: " + nome);      
         return null;
     }
 
+    @GetMapping(value = "/{id}")
+    public UF exibir(@PathVariable("id") Integer id){
+        System.out.println("Listando dados");
+        return repository.findUFByIdUF(id);
+    }
+
     @GetMapping()
-    public List<Cadastro> listar(){
+    public List<UF> listar(){
         System.out.println("Listando dados");
         return repository.findAll();
     }

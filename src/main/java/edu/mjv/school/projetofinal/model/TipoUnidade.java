@@ -1,5 +1,5 @@
 package edu.mjv.school.projetofinal.model;
 
-public class Imovel {
-    
+public enum TipoUnidade {
+    UN, KG, MT, PC;
 }
