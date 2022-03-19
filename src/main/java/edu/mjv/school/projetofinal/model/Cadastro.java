@@ -1,6 +1,14 @@
 package edu.mjv.school.projetofinal.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Cadastro {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     
@@ -23,7 +31,5 @@ public class Cadastro {
     @Override
     public String toString() {
         return "id = " + this.id + "nome = " + this.nome;
-    }
-
-    
+    }    
 }
