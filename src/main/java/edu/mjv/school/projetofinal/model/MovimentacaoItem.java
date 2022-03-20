@@ -2,14 +2,7 @@ package edu.mjv.school.projetofinal.model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import edu.mjv.school.projetofinal.dto.MovimentacaoItemDTO;
 
@@ -30,7 +23,7 @@ public class MovimentacaoItem {
     @Column(scale = 2, precision = 10)
     private BigDecimal precoVenda;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Movimentacao movimentacao;
 
     public Integer getId() {
@@ -73,13 +66,21 @@ public class MovimentacaoItem {
         this.quantidade = quantidade;
     }
 
-    /*@PrePersist
+    public Movimentacao getMovimentacao() {
+        return movimentacao;
+    }
+
+    public void setMovimentacao(Movimentacao movimentacao) {
+        this.movimentacao = movimentacao;
+    }
+
+    @PrePersist
     public void prePersist() {
         if(movimentacao.getTipoMovimentacao() == TipoMovimentacao.ENTRADA)
             produto.setEstoque(produto.getEstoque().add(quantidade));
         else
             produto.setEstoque(produto.getEstoque().subtract(quantidade));
-    }*/
+    }
 
     public MovimentacaoItemDTO _toConvertMovimentacaoItemDTO(){
         MovimentacaoItemDTO dto = new MovimentacaoItemDTO();

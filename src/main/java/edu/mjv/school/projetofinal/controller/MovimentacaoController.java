@@ -38,15 +38,15 @@ public class MovimentacaoController {
     private ProdutoRepository produtoRepository;
 
     @PostMapping()
-    public Movimentacao gravar(@RequestBody MovimentacaoDTO movimentacaoDTO){
+    public void gravar(@RequestBody MovimentacaoDTO movimentacaoDTO){
         Movimentacao movimentacao = _toConvertMovimentacaoEntity(movimentacaoDTO);
-        return repository.save(movimentacao);
+        repository.save(movimentacao);
     }
 
     @PutMapping()
-    public Movimentacao alterar(@RequestBody MovimentacaoDTO movimentacaoDTO){
+    public void alterar(@RequestBody MovimentacaoDTO movimentacaoDTO){
         Movimentacao movimentacao = _toConvertMovimentacaoEntity(movimentacaoDTO);
-        return repository.save(movimentacao);
+        repository.save(movimentacao);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -85,7 +85,7 @@ public class MovimentacaoController {
             p.setEmpresa(empresa.get());
             movimentacaoItem.setProduto(p);
             movimentacaoItem.setQuantidade(movimentacaoItemDTO.getQuantidade());
-            entity.getItens().add(movimentacaoItem);
+            entity.addItem(movimentacaoItem);
         }
     
         return entity ;
