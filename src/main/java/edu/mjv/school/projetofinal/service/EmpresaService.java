@@ -24,6 +24,10 @@ public class EmpresaService {
         repository.save(_toConvertEmpresaEntity(empresaDTO));
     }
 
+    public Empresa buscarPorId(Integer id){
+        return repository.findById(id).orElse(null);
+    }
+
     public void apagarPorId(Integer id){
         System.out.println("Apagando dados");
         System.out.println("Id:" + id); 

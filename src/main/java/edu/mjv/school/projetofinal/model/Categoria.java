@@ -47,4 +47,12 @@ public class Categoria {
     public void setMargemLucroMedia(BigDecimal margemLucroMedia) {
         this.margemLucroMedia = margemLucroMedia;
     }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 }

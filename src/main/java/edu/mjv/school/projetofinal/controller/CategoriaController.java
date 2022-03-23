@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.mjv.school.projetofinal.dto.CategoriaDTO;
 import edu.mjv.school.projetofinal.model.Categoria;
 import edu.mjv.school.projetofinal.service.CategoriaService;
 
@@ -22,13 +23,13 @@ public class CategoriaController {
     private CategoriaService service;
 
     @PostMapping()
-    public void gravar(@RequestBody Categoria categoria){
-        service.salvar(categoria);
+    public void gravar(@RequestBody CategoriaDTO categoriaDTO){
+        service.salvar(categoriaDTO);
     }
 
     @PutMapping()
-    public void alterar(@RequestBody Categoria categoria){
-        service.salvar(categoria); 
+    public void alterar(@RequestBody CategoriaDTO categoriaDTO){
+        service.salvar(categoriaDTO); 
     }
 
     @DeleteMapping(value = "/{id}")
