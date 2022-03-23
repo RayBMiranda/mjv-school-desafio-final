@@ -14,6 +14,7 @@ Para a correta utilização da API deve ser seguida a seguinte ordem de inclusõ
 	Pais -> UF -> Empresa -> Categoria -> Produto -> Movimentação
 
 Exemplos de JSON para Post:
+
 /paises
 
     {
