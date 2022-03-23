@@ -71,17 +71,12 @@ public class Produto {
     public void prePersist() {
         if(codigoInterno==null) 
             codigoInterno = String.valueOf(id);
-        if(log == null)
-            log = new Log();
+        log = new Log();
         log.setCriadoEm(LocalDateTime.now());
     }
  
     @PreUpdate
     public void preUpdate() {
-        if(codigoInterno==null) 
-            codigoInterno = String.valueOf(id);
-        if(log == null)
-            log = new Log();
         log.setAlteradoEm(LocalDateTime.now());
     }
 

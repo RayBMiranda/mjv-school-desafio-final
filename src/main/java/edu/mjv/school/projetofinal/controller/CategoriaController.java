@@ -10,46 +10,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.mjv.school.projetofinal.model.Categoria;
-import edu.mjv.school.projetofinal.repository.CategoriaRepository;
+import edu.mjv.school.projetofinal.service.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaController {
     @Autowired
-    private CategoriaRepository repository;
+    private CategoriaService service;
 
     @PostMapping()
     public void gravar(@RequestBody Categoria categoria){
-        repository.save(categoria);
+        service.salvar(categoria);
     }
 
     @PutMapping()
     public void alterar(@RequestBody Categoria categoria){
-        System.out.println("Alterando dados");
-        System.out.println(categoria); 
-        repository.save(categoria); 
+        service.salvar(categoria); 
     }
 
     @DeleteMapping(value = "/{id}")
     public void excluir(@PathVariable("id") Integer id){
-        System.out.println("Apagando dados");
-        System.out.println("Id:" + id); 
-        repository.deleteById(id); 
-    }
-
-    @GetMapping("/filtro")
-    public List<Categoria> filtrar(@RequestParam("nm") String nome){
-        System.out.println("Listando categoria pelo nome: " + nome);      
-        return null;
+        service.apagarPorId(id);
     }
 
     @GetMapping()
     public List<Categoria> listar(){
-        System.out.println("Listando dados");
-        return repository.findAll();
+        return service.listarTodos();
     }
 }

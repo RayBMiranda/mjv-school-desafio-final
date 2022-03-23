@@ -2,11 +2,8 @@ package edu.mjv.school.projetofinal.dto;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import edu.mjv.school.projetofinal.model.TipoMovimentacao;
 
-@Component
 public class MovimentacaoDTO {
     private Integer id;
 

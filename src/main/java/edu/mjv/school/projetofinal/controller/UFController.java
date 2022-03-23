@@ -10,50 +10,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.mjv.school.projetofinal.dto.UFDTO;
 import edu.mjv.school.projetofinal.model.UF;
-import edu.mjv.school.projetofinal.repository.UFRepository;
+import edu.mjv.school.projetofinal.service.UFService;
 
 @RestController
 @RequestMapping("/ufs")
 public class UFController {
     @Autowired
-    private UFRepository repository;
+    private UFService service;
 
     @PostMapping()
-    public UF gravar(@RequestBody UF uf){
-        return repository.save(uf);
+    public void gravar(@RequestBody UFDTO ufDTO){
+        service.salvar(ufDTO);
     }
 
     @PutMapping()
-    public UF alterar(@RequestBody UF uf){
-         return repository.save(uf); 
+    public void alterar(@RequestBody UFDTO ufDTO){
+        service.salvar(ufDTO); 
     }
 
     @DeleteMapping(value = "/{id}")
     public void excluir(@PathVariable("id") Integer id){
-        System.out.println("Apagando dados");
-        System.out.println("Id:" + id); 
-        repository.deleteById(id); 
-    }
-
-    @GetMapping("/filtro")
-    public List<UF> filtrar(@RequestParam("nm") String nome){
-        System.out.println("Listando categoria pelo nome: " + nome);      
-        return null;
-    }
-
-    @GetMapping(value = "/{id}")
-    public UF exibir(@PathVariable("id") Integer id){
-        System.out.println("Listando dados");
-        return repository.findUFByIdUF(id);
+        service.apagarPorId(id); 
     }
 
     @GetMapping()
     public List<UF> listar(){
-        System.out.println("Listando dados");
-        return repository.findAll();
+        return service.listarTodos();
     }
 }

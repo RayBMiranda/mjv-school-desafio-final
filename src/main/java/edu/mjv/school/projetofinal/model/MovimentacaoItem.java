@@ -23,9 +23,6 @@ public class MovimentacaoItem {
     @Column(scale = 2, precision = 10)
     private BigDecimal precoVenda;
 
-    @ManyToOne
-    private Movimentacao movimentacao;
-
     public Integer getId() {
         return id;
     }
@@ -66,20 +63,12 @@ public class MovimentacaoItem {
         this.quantidade = quantidade;
     }
 
-    public Movimentacao getMovimentacao() {
-        return movimentacao;
-    }
-
-    public void setMovimentacao(Movimentacao movimentacao) {
-        this.movimentacao = movimentacao;
-    }
-
     @PrePersist
     public void prePersist() {
-        if(movimentacao.getTipoMovimentacao() == TipoMovimentacao.ENTRADA)
+      /*  if(movimentacao.getTipoMovimentacao() == TipoMovimentacao.ENTRADA)
             produto.setEstoque(produto.getEstoque().add(quantidade));
         else
-            produto.setEstoque(produto.getEstoque().subtract(quantidade));
+            produto.setEstoque(produto.getEstoque().subtract(quantidade));*/
     }
 
     public MovimentacaoItemDTO _toConvertMovimentacaoItemDTO(){

@@ -7,5 +7,4 @@ import edu.mjv.school.projetofinal.model.Movimentacao;
 
 @Repository
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Integer>{
-    
 }

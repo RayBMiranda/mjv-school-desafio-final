@@ -31,13 +31,13 @@ public class Empresa {
     @Column(length = 60)
     private String razaoSocial;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
     
     @ElementCollection
     private List<String> emails;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Telefone> telefones;
 
     public Integer getId() {

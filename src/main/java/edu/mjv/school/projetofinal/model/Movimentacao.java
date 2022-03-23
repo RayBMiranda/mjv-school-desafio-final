@@ -1,5 +1,6 @@
 package edu.mjv.school.projetofinal.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,8 @@ public class Movimentacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "movimentacao", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "movimentacao_id")
     private List<MovimentacaoItem> itens = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
@@ -31,9 +33,19 @@ public class Movimentacao {
 
     @PrePersist
     public void prePersist() {
-        if(log == null)
-            log = new Log();
+        log = new Log();
         log.setCriadoEm(LocalDateTime.now());
+        boolean isEntrada = tipoMovimentacao == TipoMovimentacao.ENTRADA;
+        BigDecimal estoqueAtual = new BigDecimal(0);
+        BigDecimal estoqueMovimentado = new BigDecimal(0);
+        for (int i = 0; i < itens.size(); i++) {
+            estoqueAtual = itens.get(i).getProduto().getEstoque();
+            estoqueMovimentado = itens.get(i).getQuantidade();
+            if(isEntrada)
+                itens.get(i).getProduto().setEstoque(estoqueAtual.add(estoqueMovimentado));
+            else
+                itens.get(i).getProduto().setEstoque(estoqueAtual.subtract(estoqueMovimentado));
+        }
     }
  
     @PreUpdate
@@ -96,7 +108,6 @@ public class Movimentacao {
      }
 
     public void addItem(MovimentacaoItem movimentacaoItem) {
-        movimentacaoItem.setMovimentacao(this);
         this.itens.add(movimentacaoItem);
     }
 }
