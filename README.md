@@ -4,7 +4,7 @@ A API é a representação de um controle de estoque multi-filial ou multi-empre
 
 ## Diagrama de Classes - UML
 
-
+![alt text](diagrama_classes.png)
 
 ## 🚀 Começando
 
