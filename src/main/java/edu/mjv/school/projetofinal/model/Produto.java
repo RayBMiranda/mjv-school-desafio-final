@@ -73,6 +73,11 @@ public class Produto {
             codigoInterno = String.valueOf(id);
         log = new Log();
         log.setCriadoEm(LocalDateTime.now());
+        if(precoCusto.compareTo(new BigDecimal(0)) > 0 && (precoVenda == BigDecimal.ZERO || precoVenda == null)){
+            BigDecimal margemLucroMulti = categoria.getMargemLucroMedia().divide(new BigDecimal(100.0));
+            BigDecimal lucro = precoCusto.multiply(margemLucroMulti);
+            precoVenda = precoCusto.add(lucro);
+        }
     }
  
     @PreUpdate
