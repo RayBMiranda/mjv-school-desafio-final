@@ -1,12 +1,14 @@
 package edu.mjv.school.projetofinal.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.mjv.school.projetofinal.dto.CategoriaDTO;
+import edu.mjv.school.projetofinal.exceptionhandler.categoriaControllerAdvice.CategoriaBadRequestException;
+import edu.mjv.school.projetofinal.exceptionhandler.categoriaControllerAdvice.CategoriaNotFoundException;
 import edu.mjv.school.projetofinal.model.Categoria;
 import edu.mjv.school.projetofinal.repository.CategoriaRepository;
 
@@ -27,10 +29,17 @@ public class CategoriaService {
         System.out.println("Id:" + id); 
         repository.deleteById(id); 
     }
-
-    public List<Categoria> listarTodos() {
-        System.out.println("Listando dados");
-        return repository.findAll();
+    
+    public Categoria buscarPorId(Integer id){
+        Optional<Categoria> categoria = repository.findById(id);
+        return categoria.orElseThrow(() -> new CategoriaNotFoundException());
+    }
+    
+    public Categoria buscarPorIdEmpresa(Integer id){
+    	if(!(id instanceof Integer)) throw new CategoriaBadRequestException();
+    	
+        Optional<Categoria> categoria = repository.findCategoriaByIdEmpresa(id);
+        return categoria.orElseThrow(() -> new CategoriaNotFoundException());
     }
 
     public Categoria _toConvertCategoriaEntity(CategoriaDTO categoriaDTO){
