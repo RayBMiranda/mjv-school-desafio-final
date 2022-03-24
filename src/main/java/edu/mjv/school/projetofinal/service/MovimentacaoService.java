@@ -49,7 +49,7 @@ public class MovimentacaoService {
         return repository.findAll();
     }
     
-    public Movimentacao buscaPorId(Integer id){
+    public Movimentacao buscarPorId(Integer id){
         Optional<Movimentacao> movimentacao = repository.findMovimentacaoById(id);
         return movimentacao.orElseThrow(() -> new MovimentacaoNotFoundException());
     }
