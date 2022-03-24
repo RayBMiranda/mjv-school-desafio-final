@@ -42,6 +42,6 @@ public class CategoriaController {
     
     @GetMapping(value = "/id-empresa/{id}")
     public Categoria buscarPorIdEmpresa(@PathVariable("id") Integer id){
-        return service.buscarPorIdEmpresa(id);
+   		return service.buscarPorIdEmpresa(id);    	
     }
 }
