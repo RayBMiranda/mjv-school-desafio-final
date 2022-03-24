@@ -62,11 +62,11 @@ public class MovimentacaoService {
         else throw new MovimentacaoNotFoundException();
     }
     
-    public Movimentacao buscarPorIdEmpresa(Integer id){
+    public List<Movimentacao> buscarPorIdEmpresa(Integer id){
     	if(!(id instanceof Integer)) throw new MovimentacaoBadRequestException();
     	
-        Optional<Movimentacao> movimentacao = repository.findMovimentacaoById(id);
-        return movimentacao.orElseThrow(() -> new MovimentacaoNotFoundException());
+        Optional<List<Movimentacao>> movimentacoes = repository.findMovimentacaoByIdEmpresa(id);
+        return movimentacoes.orElseThrow(() -> new MovimentacaoNotFoundException());
     }
 
     public Movimentacao _toConvertMovimentacaoEntity(MovimentacaoDTO movimentacaoDTO){

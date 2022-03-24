@@ -1,5 +1,6 @@
 package edu.mjv.school.projetofinal.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -37,11 +38,11 @@ public class ProdutoService {
         repository.deleteById(id); 
     }
     
-    public Produto buscarPorIdEmpresa(Integer id){
+    public List<Produto> buscarPorIdEmpresa(Integer id){
     	if(!(id instanceof Integer)) throw new ProdutoBadRequestException();
     	
-        Optional<Produto> produto = repository.findProdutoByIdEmpresa(id);
-        return produto.orElseThrow(() -> new ProdutoNotFoundException());
+        Optional<List<Produto>> produtos = repository.findProdutoByIdEmpresa(id);
+        return produtos.orElseThrow(() -> new ProdutoNotFoundException());
     }
 
     public Produto _toConvertProdutoEntity(ProdutoDTO produtoDTO){

@@ -1,5 +1,6 @@
 package edu.mjv.school.projetofinal.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -34,9 +35,9 @@ public class CategoriaService {
         return categoria.orElseThrow(() -> new CategoriaNotFoundException());
     }
     
-    public Categoria buscarPorIdEmpresa(Integer id){
-		Optional<Categoria> categoria = repository.findCategoriaByIdEmpresa(id);
-        return categoria.orElseThrow(() -> new CategoriaNotFoundException());
+    public List<Categoria> buscarPorIdEmpresa(Integer id){
+		Optional<List<Categoria>> categorias = repository.findCategoriaByIdEmpresa(id);
+        return categorias.orElseThrow(() -> new CategoriaNotFoundException());
     }
 
     public Categoria _toConvertCategoriaEntity(CategoriaDTO categoriaDTO){
