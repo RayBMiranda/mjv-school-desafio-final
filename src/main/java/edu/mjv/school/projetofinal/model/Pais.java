@@ -15,7 +15,7 @@ public class Pais {
     private Integer id;
     @Column(length = 60)
     private String nome;
-    @Column(length = 2)
+    @Column(length = 4)
     private String sigla;
     
     public Integer getId() {

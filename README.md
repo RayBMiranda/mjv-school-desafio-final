@@ -6,6 +6,28 @@ A API é a representação de um controle de estoque multi-filial ou multi-empre
 
 ![alt text](diagrama_classes.png)
 
+
+### 📋 Pré-requisitos
+
+Para executar o software é necessário que tenha no mínimo o Java 11 e o Maven instalado em sua máquina.
+Link download Java: https://www.java.com/pt-BR/download/ie_manual.jsp?locale=pt_BR
+
+Link download Maven: https://maven.apache.org/download.cgi
+
+## 📦 Desenvolvimento
+
+O sistema foi desenvolvido utilizado recursos do Spring Framework como os startes web para que o Spring se encarregue das configurações básicas necessárias para um servidor web, Spring Data JPA para persistência, springdoc-openapi para geração da documentação com Swagger-ui.
+
+Também foram utilizados bibliotecas externas ao Spring Framework como
+ MySQL Connector/J que fornece conectividade para clientes desenvolvidos na linguagem de programação Java, Model Mapper que mapeia entidades em dto, considerando quais campos correspondem.
+
+## 🛠️ Construído com
+
+* [VS Code](https://code.visualstudio.com/Download) - A IDE utilizada
+* [Spring Boot](https://start.spring.io/) - O Framework utilizado
+* [Astah](https://astah.net/) - Software de Modelagem e Diagramação
+
+
 ## 🚀 Começando
 
 A API está documentada com Swagger, com a API em funcionamento é possível acessar via browser na seguinte url: http://localhost:8080/swagger-ui/index.html
@@ -198,29 +220,6 @@ Exemplos de JSON para Post:
     "idEmpresa": 2
     }
 	
-
-
-
-### 📋 Pré-requisitos
-
-Para executar o software é necessário que tenha no mínimo o Java 11 e o Maven instalado em sua máquina.
-Link download Java: https://www.java.com/pt-BR/download/ie_manual.jsp?locale=pt_BR
-
-Link download Maven: https://maven.apache.org/download.cgi
-
-## 📦 Desenvolvimento
-
-O sistema foi desenvolvido utilizado recursos do Spring Framework como os startes web para que o Spring se encarregue das configurações básicas necessárias para um servidor web, Spring Data JPA para persistência, springdoc-openapi para geração da documentação com Swagger-ui.
-
-Também foram utilizados bibliotecas externas ao Spring Framework como
- MySQL Connector/J que fornece conectividade para clientes desenvolvidos na linguagem de programação Java, Model Mapper que mapeia entidades em dto, considerando quais campos correspondem.
-
-## 🛠️ Construído com
-
-* [VS Code](https://code.visualstudio.com/Download) - A IDE utilizada
-* [Spring Boot](https://start.spring.io/) - O Framework utilizado
-* [Astah](https://astah.net/) - Software de Modelagem e Diagramação
-
 
 ## ✒️ Autores
 
