@@ -19,166 +19,161 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(
-    name = "produtos", 
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"empresa_id", "codigo_interno"}),
-        @UniqueConstraint(columnNames = {"empresa_id", "ean"})
-    }
-    )
+@Table(name = "produtos", uniqueConstraints = { @UniqueConstraint(columnNames = { "empresa_id", "codigo_interno" }),
+		@UniqueConstraint(columnNames = { "empresa_id", "ean" }) })
 public class Produto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    //999.999.999
-    @Column(length = 9, name = "codigo_interno")
-    private String codigoInterno;
-    
-    @Column(length = 13, name = "ean")
-    private String ean;
-    
-    @Column(length = 60)
-    @NotNull
-    private String descricao;
-    
-    @Column(scale = 2, precision = 10)
-    @NotNull
-    private BigDecimal precoVenda;
+	// 999.999.999
+	@Column(length = 9, name = "codigo_interno")
+	private String codigoInterno;
 
-    @Column(scale = 2, precision = 10)
-    private BigDecimal precoCusto;
-    
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private TipoUnidade tipoUnidade;
-    
-    @ManyToOne
-    private Categoria categoria;
+	@Column(length = 13, name = "ean")
+	private String ean;
 
-    @Column(scale = 2, precision = 10)
-    private BigDecimal estoque;
+	@Column(length = 60)
+	@NotNull
+	private String descricao;
 
-    @ManyToOne
-    @JoinColumn(name = "empresa_id")
-    private Empresa empresa;
+	@Column(scale = 2, precision = 10)
+	@NotNull
+	private BigDecimal precoVenda;
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[ id=".concat(String.valueOf(id)));
-        sb.append(" ean=".concat(ean));
-        sb.append(" descricao=".concat(descricao));
-        sb.append(" estoque=".concat(String.valueOf(estoque)));
-        sb.append(" precoVenda=".concat(String.valueOf(precoVenda)).concat("]"));
-        return sb.toString();
-    }
+	@Column(scale = 2, precision = 10)
+	private BigDecimal precoCusto;
 
-    private Log log;
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	private TipoUnidade tipoUnidade;
 
-    @PrePersist
-    public void prePersist() {
-        if(codigoInterno==null) 
-            codigoInterno = String.valueOf(id);
-        log = new Log();
-        log.setCriadoEm(LocalDateTime.now());
-        if(precoCusto.compareTo(new BigDecimal(0)) > 0 && (precoVenda == BigDecimal.ZERO || precoVenda == null)){
-            BigDecimal margemLucroMulti = categoria.getMargemLucroMedia().divide(new BigDecimal(100.0));
-            BigDecimal lucro = precoCusto.multiply(margemLucroMulti);
-            precoVenda = precoCusto.add(lucro);
-        }
-    }
- 
-    @PreUpdate
-    public void preUpdate() {
-        log.setAlteradoEm(LocalDateTime.now());
-    }
+	@ManyToOne
+	private Categoria categoria;
 
-    public Integer getId() {
-        return id;
-    }
+	@Column(scale = 2, precision = 10)
+	private BigDecimal estoque;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	@ManyToOne
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+	
+	private Log log;
 
-    public String getCodigoInterno() {
-        return codigoInterno;
-    }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[ id=".concat(String.valueOf(id)));
+		sb.append(" ean=".concat(ean));
+		sb.append(" descricao=".concat(descricao));
+		sb.append(" estoque=".concat(String.valueOf(estoque)));
+		sb.append(" precoVenda=".concat(String.valueOf(precoVenda)).concat("]"));
+		return sb.toString();
+	}
 
-    public void setCodigoInterno(String codigoInterno) {
-        this.codigoInterno = codigoInterno;
-    }
+	@PrePersist
+	public void prePersist() {
+		if (codigoInterno == null)
+			codigoInterno = String.valueOf(id);
+		log = new Log();
+		log.setCriadoEm(LocalDateTime.now());
+		if (precoCusto.compareTo(new BigDecimal(0)) > 0 && (precoVenda == BigDecimal.ZERO || precoVenda == null)) {
+			BigDecimal margemLucroMulti = categoria.getMargemLucroMedia().divide(new BigDecimal(100.0));
+			BigDecimal lucro = precoCusto.multiply(margemLucroMulti);
+			precoVenda = precoCusto.add(lucro);
+		}
+	}
 
-    public String getEan() {
-        return ean;
-    }
+	@PreUpdate
+	public void preUpdate() {
+		log.setAlteradoEm(LocalDateTime.now());
+	}
 
-    public void setEan(String ean) {
-        this.ean = ean;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public String getCodigoInterno() {
+		return codigoInterno;
+	}
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
+	public void setCodigoInterno(String codigoInterno) {
+		this.codigoInterno = codigoInterno;
+	}
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+	public String getEan() {
+		return ean;
+	}
 
-    public Empresa getEmpresa() {
-        return empresa;
-    }
+	public void setEan(String ean) {
+		this.ean = ean;
+	}
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public BigDecimal getEstoque() {
-        return estoque;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public void setEstoque(BigDecimal estoque) {
-        this.estoque = estoque;
-    }
+	public Categoria getCategoria() {
+		return categoria;
+	}
 
-    public Log getLog() {
-        return log;
-    }
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
-    public void setLog(Log log) {
-        this.log = log;
-    }
+	public Empresa getEmpresa() {
+		return empresa;
+	}
 
-    public BigDecimal getPrecoCusto() {
-        return precoCusto;
-    }
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
 
-    public void setPrecoCusto(BigDecimal precoCusto) {
-        this.precoCusto = precoCusto;
-    }
+	public BigDecimal getEstoque() {
+		return estoque;
+	}
 
-    public BigDecimal getPrecoVenda() {
-        return precoVenda;
-    }
+	public void setEstoque(BigDecimal estoque) {
+		this.estoque = estoque;
+	}
 
-    public void setPrecoVenda(BigDecimal precoVenda) {
-        this.precoVenda = precoVenda;
-    }
+	public Log getLog() {
+		return log;
+	}
 
-    public TipoUnidade getTipoUnidade() {
-        return tipoUnidade;
-    }
+	public void setLog(Log log) {
+		this.log = log;
+	}
 
-    public void setTipoUnidade(TipoUnidade tipoUnidade) {
-        this.tipoUnidade = tipoUnidade;
-    }
+	public BigDecimal getPrecoCusto() {
+		return precoCusto;
+	}
+
+	public void setPrecoCusto(BigDecimal precoCusto) {
+		this.precoCusto = precoCusto;
+	}
+
+	public BigDecimal getPrecoVenda() {
+		return precoVenda;
+	}
+
+	public void setPrecoVenda(BigDecimal precoVenda) {
+		this.precoVenda = precoVenda;
+	}
+
+	public TipoUnidade getTipoUnidade() {
+		return tipoUnidade;
+	}
+
+	public void setTipoUnidade(TipoUnidade tipoUnidade) {
+		this.tipoUnidade = tipoUnidade;
+	}
 }

@@ -1,13 +1,16 @@
 package edu.mjv.school.projetofinal.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import edu.mjv.school.projetofinal.model.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer>{
-    @Query("SELECT DISTINCT p FROM Produto p INNER JOIN p.empresa e")
-    Produto findProdutoById(Integer id);
+	@Query("SELECT p FROM Produto p WHERE p.empresa.id = :id_empresa")
+    Optional<Produto> findProdutoByIdEmpresa(@Param("id_empresa") Integer id_empresa);
 }

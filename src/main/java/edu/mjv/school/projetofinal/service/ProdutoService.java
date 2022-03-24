@@ -1,12 +1,14 @@
 package edu.mjv.school.projetofinal.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.mjv.school.projetofinal.dto.ProdutoDTO;
+import edu.mjv.school.projetofinal.exceptionhandler.produtoControllerAdvice.ProdutoBadRequestException;
+import edu.mjv.school.projetofinal.exceptionhandler.produtoControllerAdvice.ProdutoNotFoundException;
 import edu.mjv.school.projetofinal.model.Produto;
 import edu.mjv.school.projetofinal.repository.CategoriaRepository;
 import edu.mjv.school.projetofinal.repository.EmpresaRepository;
@@ -34,10 +36,12 @@ public class ProdutoService {
         System.out.println("Id:" + id); 
         repository.deleteById(id); 
     }
-
-    public List<Produto> listarTodos() {
-        System.out.println("Listando dados");
-        return repository.findAll();
+    
+    public Produto buscarPorIdEmpresa(Integer id){
+    	if(!(id instanceof Integer)) throw new ProdutoBadRequestException();
+    	
+        Optional<Produto> produto = repository.findProdutoByIdEmpresa(id);
+        return produto.orElseThrow(() -> new ProdutoNotFoundException());
     }
 
     public Produto _toConvertProdutoEntity(ProdutoDTO produtoDTO){
