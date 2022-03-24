@@ -78,8 +78,6 @@ public class MovimentacaoService {
             MovimentacaoItem movimentacaoItem = new MovimentacaoItem();
             movimentacaoItem = new ModelMapper().map(movimentacaoItemDTO, MovimentacaoItem.class);
             Produto p = produtoRepository.findById(movimentacaoItemDTO.getIdProduto()).orElse(null);
-            if(p != null)
-                p.setEmpresa(entity.getEmpresa());
             movimentacaoItem.setProduto(p);
             entity.addItem(movimentacaoItem);
         }

@@ -163,7 +163,7 @@ Exemplos de JSON para Post:
     }
     
     {
-	    "codigoInterno": "124",
+	    "codigoInterno": "125",
 	    "ean": "7891038055208",
 	    "descricao": "SABAO EM PO OMO PROGRESS 1,8KG",
 	    "precoVenda": 15,
