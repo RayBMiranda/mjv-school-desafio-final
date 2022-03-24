@@ -1,7 +1,11 @@
 package edu.mjv.school.projetofinal.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import edu.mjv.school.projetofinal.dto.MovimentacaoDTO;
 import edu.mjv.school.projetofinal.dto.MovimentacaoItemDTO;
+import edu.mjv.school.projetofinal.exceptionhandler.MovimentacaoInternalServerErrorException;
+import edu.mjv.school.projetofinal.exceptionhandler.MovimentacaoNotFoundException;
 import edu.mjv.school.projetofinal.model.Movimentacao;
 import edu.mjv.school.projetofinal.model.MovimentacaoItem;
 import edu.mjv.school.projetofinal.model.Produto;
@@ -41,6 +47,23 @@ public class MovimentacaoService {
     public List<Movimentacao> listarTodos(){
         System.out.println("Listando dados");
         return repository.findAll();
+    }
+    
+    public Movimentacao buscaPorId(Integer id){
+        Optional<Movimentacao> movimentacao = repository.findMovimentacaoById(id);
+        return movimentacao.orElseThrow(() -> new MovimentacaoNotFoundException());
+    }
+    
+    public List<Movimentacao> buscarPorData(String data){
+    	if(data.length() > 10) throw new MovimentacaoInternalServerErrorException();
+    	
+        DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate ld = LocalDate.parse(data, DATEFORMATTER);
+        LocalDateTime dt = LocalDateTime.of(ld, LocalDateTime.now().toLocalTime());
+        Optional<List<Movimentacao>> movimentacao = repository.findAllWithCreationDate(dt);
+        
+        if(!movimentacao.get().isEmpty()) return movimentacao.get();
+        else throw new MovimentacaoNotFoundException();
     }
 
     public Movimentacao _toConvertMovimentacaoEntity(MovimentacaoDTO movimentacaoDTO){
