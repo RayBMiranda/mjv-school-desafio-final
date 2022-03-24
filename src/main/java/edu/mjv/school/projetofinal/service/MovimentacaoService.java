@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 
 import edu.mjv.school.projetofinal.dto.MovimentacaoDTO;
 import edu.mjv.school.projetofinal.dto.MovimentacaoItemDTO;
-import edu.mjv.school.projetofinal.exceptionhandler.MovimentacaoBadRequestException;
-import edu.mjv.school.projetofinal.exceptionhandler.MovimentacaoInternalServerErrorException;
-import edu.mjv.school.projetofinal.exceptionhandler.MovimentacaoNotFoundException;
+import edu.mjv.school.projetofinal.exceptionhandler.movimentacaoControllerAdvice.MovimentacaoBadRequestException;
+import edu.mjv.school.projetofinal.exceptionhandler.movimentacaoControllerAdvice.MovimentacaoInternalServerErrorException;
+import edu.mjv.school.projetofinal.exceptionhandler.movimentacaoControllerAdvice.MovimentacaoNotFoundException;
 import edu.mjv.school.projetofinal.model.Movimentacao;
 import edu.mjv.school.projetofinal.model.MovimentacaoItem;
 import edu.mjv.school.projetofinal.model.Produto;
