@@ -179,7 +179,7 @@ Exemplos de JSON para Post:
 	      "quantidade": 5,
 	      "precoCusto": 6.5,
 	      "precoVenda": 9.5
-	    },
+	    }
       ],
     "tipoMovimentacao": "ENTRADA",
     "idEmpresa": 1
