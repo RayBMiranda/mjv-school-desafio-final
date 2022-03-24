@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.mjv.school.projetofinal.exceptionhandler.PaisNotFoundException;
 import edu.mjv.school.projetofinal.model.Pais;
 import edu.mjv.school.projetofinal.repository.PaisRepository;
 
@@ -31,7 +32,7 @@ public class PaisService {
     }
 
     public Pais exibirPorId(Integer idPais) {
-        return repository.findById(idPais).orElse(null);
+        return repository.findById(idPais).orElseThrow(() -> new PaisNotFoundException());
     }
 
 

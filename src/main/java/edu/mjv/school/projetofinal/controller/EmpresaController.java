@@ -38,6 +38,11 @@ public class EmpresaController {
         service.apagarPorId(id);
     }
 
+    @GetMapping(value = "/{id}")
+    public Empresa buscarPorId(@PathVariable("id") Integer id){
+        return service.buscarPorId(id);
+    }
+
     @GetMapping()
     public List<Empresa> listar(){
         return service.listarTodos();

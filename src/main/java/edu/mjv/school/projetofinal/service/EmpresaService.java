@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.mjv.school.projetofinal.dto.EmpresaDTO;
+import edu.mjv.school.projetofinal.exceptionhandler.EmpresaNotFoundException;
 import edu.mjv.school.projetofinal.model.Empresa;
 import edu.mjv.school.projetofinal.model.Endereco;
 import edu.mjv.school.projetofinal.repository.EmpresaRepository;
@@ -25,7 +26,7 @@ public class EmpresaService {
     }
 
     public Empresa buscarPorId(Integer id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(() -> new EmpresaNotFoundException());
     }
 
     public void apagarPorId(Integer id){

@@ -46,7 +46,7 @@ public class MovimentacaoController{
     
     @GetMapping(value = "/{id}")
     public Movimentacao buscaPorId(@PathVariable("id") Integer id){
-        return service.buscaPorId(id);
+        return service.buscarPorId(id);
     }
     
 
