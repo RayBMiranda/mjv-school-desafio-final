@@ -10,24 +10,32 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "produtos")
+@Table(
+    name = "produtos", 
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"empresa_id", "codigo_interno"}),
+        @UniqueConstraint(columnNames = {"empresa_id", "ean"})
+    }
+    )
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     //999.999.999
-    @Column(length = 9, unique = true)
+    @Column(length = 9, name = "codigo_interno")
     private String codigoInterno;
     
-    @Column(length = 13, unique = true)
+    @Column(length = 13, name = "ean")
     private String ean;
     
     @Column(length = 60)
@@ -52,6 +60,7 @@ public class Produto {
     private BigDecimal estoque;
 
     @ManyToOne
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
     @Override

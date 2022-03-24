@@ -63,14 +63,6 @@ public class MovimentacaoItem {
         this.quantidade = quantidade;
     }
 
-    @PrePersist
-    public void prePersist() {
-      /*  if(movimentacao.getTipoMovimentacao() == TipoMovimentacao.ENTRADA)
-            produto.setEstoque(produto.getEstoque().add(quantidade));
-        else
-            produto.setEstoque(produto.getEstoque().subtract(quantidade));*/
-    }
-
     public MovimentacaoItemDTO _toConvertMovimentacaoItemDTO(){
         MovimentacaoItemDTO dto = new MovimentacaoItemDTO();
         dto.setId(id);
