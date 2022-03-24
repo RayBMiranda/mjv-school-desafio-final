@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import edu.mjv.school.projetofinal.dto.MovimentacaoDTO;
 import edu.mjv.school.projetofinal.dto.MovimentacaoItemDTO;
+import edu.mjv.school.projetofinal.exceptionhandler.MovimentacaoBadRequestException;
 import edu.mjv.school.projetofinal.exceptionhandler.MovimentacaoInternalServerErrorException;
 import edu.mjv.school.projetofinal.exceptionhandler.MovimentacaoNotFoundException;
 import edu.mjv.school.projetofinal.model.Movimentacao;
@@ -64,6 +65,13 @@ public class MovimentacaoService {
         
         if(!movimentacao.get().isEmpty()) return movimentacao.get();
         else throw new MovimentacaoNotFoundException();
+    }
+    
+    public Movimentacao buscarPorIdEmpresa(Integer id){
+    	if(!(id instanceof Integer)) throw new MovimentacaoBadRequestException();
+    	
+        Optional<Movimentacao> movimentacao = repository.findMovimentacaoById(id);
+        return movimentacao.orElseThrow(() -> new MovimentacaoNotFoundException());
     }
 
     public Movimentacao _toConvertMovimentacaoEntity(MovimentacaoDTO movimentacaoDTO){

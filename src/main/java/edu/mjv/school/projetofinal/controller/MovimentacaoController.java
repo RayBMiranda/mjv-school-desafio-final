@@ -49,9 +49,13 @@ public class MovimentacaoController{
         return service.buscarPorId(id);
     }
     
-
     @GetMapping(value = "/data")
     public List<Movimentacao> buscarPorData(@RequestParam String criado_em){
         return service.buscarPorData(criado_em);
+    }
+    
+    @GetMapping(value = "/id-empresa/{id}")
+    public Movimentacao buscarPorIdEmpresa(@PathVariable("id") Integer id){
+        return service.buscarPorIdEmpresa(id);
     }
 }

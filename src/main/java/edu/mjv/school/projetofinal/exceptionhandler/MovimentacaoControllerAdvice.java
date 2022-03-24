@@ -20,8 +20,15 @@ public class MovimentacaoControllerAdvice {
 	
 	@ResponseBody
 	@ExceptionHandler(MovimentacaoInternalServerErrorException.class)
-	public ResponseEntity<MessageExceptionHandler> movimentacaoBadRequest(MovimentacaoInternalServerErrorException movimentacaoInternalServerErrorException){
+	public ResponseEntity<MessageExceptionHandler> movimentacaoInternalServerErrorException(MovimentacaoInternalServerErrorException movimentacaoInternalServerErrorException){
 		MessageExceptionHandler error = new MessageExceptionHandler(new Date(), HttpStatus.INTERNAL_SERVER_ERROR.value(), "Dado informado é inválido.");
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ResponseBody
+	@ExceptionHandler(MovimentacaoBadRequestException.class)
+	public ResponseEntity<MessageExceptionHandler> movimentacaoBadRequest(MovimentacaoBadRequestException movimentacaoBadRequestException){
+		MessageExceptionHandler error = new MessageExceptionHandler(new Date(), HttpStatus.BAD_REQUEST.value(), "Dado informado naõ pode ser tratado. Informe apenas números.");
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
 }
