@@ -30,7 +30,7 @@ Também foram utilizados bibliotecas externas ao Spring Framework como
 
 ## 🚀 Começando
 
-A API está documentada com Swagger, com a API em funcionamento é possível acessar via browser na seguinte url: http://localhost:8080/swagger-ui/index.html
+A API está documentada com Swagger, com a API em funcionamento é possível acessar via browser na seguinte url: http://localhost:8080/swagger-ui/index.html ou no heroku https://mjv-desafio-final.herokuapp.com/swagger-ui.html 
 
 Para a correta utilização da API deve ser seguida a seguinte ordem de inclusões (POST):
 	Pais -> UF -> Empresa -> Categoria -> Produto -> Movimentação
