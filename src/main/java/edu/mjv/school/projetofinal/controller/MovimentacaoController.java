@@ -38,11 +38,6 @@ public class MovimentacaoController{
     public void excluir(@PathVariable("id") Integer id){
         service.apagarPorId(id);
     }
-
-    @GetMapping()
-    public List<Movimentacao> listar(){
-        return service.listarTodos();
-    }
     
     @GetMapping(value = "/{id}")
     public Movimentacao buscarPorId(@PathVariable("id") Integer id){

@@ -44,11 +44,6 @@ public class MovimentacaoService {
         System.out.println("Id:" + id); 
         repository.deleteById(id); 
     }
-
-    public List<Movimentacao> listarTodos(){
-        System.out.println("Listando dados");
-        return repository.findAll();
-    }
     
     public Movimentacao buscarPorId(Integer id){
         Optional<Movimentacao> movimentacao = repository.findMovimentacaoById(id);
