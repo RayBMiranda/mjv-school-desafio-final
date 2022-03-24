@@ -19,6 +19,6 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Inte
 	@Query("SELECT m FROM Movimentacao m WHERE m.log.criadoEm <= :criado_em")
     Optional<List<Movimentacao>> findAllWithCreationDate(@Param("criado_em") LocalDateTime criado_em);
 	
-	@Query("SELECT m FROM Movimentacao m WHERE m.empresa.id <= :id_empresa")
+	@Query("SELECT m FROM Movimentacao m WHERE m.empresa.id = :id_empresa")
     Optional<Movimentacao> findMovimentacaoByIdEmpresa(@Param("id_empresa") Integer id_empresa);
 }
